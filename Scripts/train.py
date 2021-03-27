@@ -174,7 +174,7 @@ def train(net, trainloader, param_list=None, epochs=15):
             # get the inputs
             inputs, labels = data
             if use_gpu:
-                inputs, labels = Variable(inputs.cuda()), Variable(labels.cuda(async=True))
+                inputs, labels = Variable(inputs.cuda()), Variable(labels.cuda(non_blocking=True))
             else:
                 inputs, labels = Variable(inputs), Variable(labels)
 
@@ -237,7 +237,7 @@ def evaluate_stats(net, testloader):
         images, labels = data
 
         if use_gpu:
-            images, labels = (images.cuda()), (labels.cuda(async=True))
+            images, labels = (images.cuda()), (labels.cuda(non_blocking=True))
 
         outputs = net(Variable(images))
         _, predicted = torch.max(outputs.data, 1)

@@ -147,7 +147,7 @@ def Occlusion_exp(image,occluding_size,occluding_stride,model,preprocess,classes
         images, labels = data
         
         if use_gpu:
-            images, labels = (images.cuda()), (labels.cuda(async=True))
+            images, labels = (images.cuda()), (labels.cuda(non_blocking=True))
         
         outputs = model(Variable(images))
         m = nn.Softmax()
